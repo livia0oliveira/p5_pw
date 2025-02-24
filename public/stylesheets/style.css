@@ -1,0 +1,37 @@
+a {
+  color: #00B7FF;
+}
+
+/* bicho negoçado */
+#header{
+  height: 100px;
+  background-color: black;
+  color: white
+}
+
+#logo{
+  float: left;
+  height: 100px;
+}
+
+#title{
+  font-size: 70px;
+}
+
+.table td{
+  color: white
+}
+
+.info{
+  width: 20%;
+  border: 2px solid white;
+}
+
+body {
+  background-image: url("/images/The_Boiling_Isles.webp");
+  background-position: top;
+  background-repeat: no-repeat;
+
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
