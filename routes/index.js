@@ -18,7 +18,7 @@ client.connect().then(() => {
 router.get('/', async function(req, res, next) {
     try {
         const posts = await postagemDAO.getPosts(mydb);  // Usando postagemDAO para pegar os posts
-        res.render('post2', { posts });
+        res.render('index', { posts });
     } catch (err) {
         console.log(err);
         res.status(500).send("Erro ao carregar posts.");

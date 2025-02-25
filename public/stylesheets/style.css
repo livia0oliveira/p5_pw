@@ -2,7 +2,16 @@ a {
   color: #00B7FF;
 }
 
-/* bicho negoçado */
+body {
+  background-image: url("/images/The_Boiling_Isles.webp");
+  background-position: top;
+  background-repeat: no-repeat;
+
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+/* ids */
 #header{
   height: 100px;
   background-color: black;
@@ -18,6 +27,12 @@ a {
   font-size: 70px;
 }
 
+/* classes */
+.card {
+  max-width: 250px;
+  margin: 10px;
+}
+
 .table td{
   color: white
 }
@@ -25,13 +40,4 @@ a {
 .info{
   width: 20%;
   border: 2px solid white;
-}
-
-body {
-  background-image: url("/images/The_Boiling_Isles.webp");
-  background-position: top;
-  background-repeat: no-repeat;
-
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }

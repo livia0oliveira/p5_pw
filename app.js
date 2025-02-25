@@ -1,20 +1,28 @@
-var createError = require('http-errors');
 var express = require('express');
+var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const { MongoClient } = require('mongodb')
-require('dotenv').config()
-const uri = process.env.URI
-const client = new MongoClient(uri)
-const mydb = client.db('theowlhousewikidb').collection('postagem')
+const { MongoClient } = require('mongodb');
+require('dotenv').config();
+const bodyParser = require('body-parser'); // Adicione isso
+
+const uri = process.env.URI;
+const client = new MongoClient(uri);
+const mydb = client.db('theowlhousewikidb').collection('postagem');
 const postagemDAO = require('./postagemDAO');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-// var postRouter = require('./routes/post');
+var crudRouter = require('./routes/crud');
 
 var app = express();
+
+// Middleware para lidar com dados de formulários
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());  // Coloque isso antes das rotas
+app.use(express.json()); // Para processar JSON no corpo da requisição
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-// app.use('/post', postRouter);
+app.use('/crud', crudRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,11 +45,9 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });

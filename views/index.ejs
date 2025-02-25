@@ -1,17 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Blog</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Basic Bootstrap Template</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Postagens</h1>
-    <ul>
-        <% posts.forEach(post => { %>
-            <li>
-                <a href="/post/<%= post.id %>"><%= post.titulo %></a>
-            </li>
-        <% }); %>
-    </ul>
+    
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+    <%- include('extras/header') %>
+
+    <div class="container bg-dark text-white">
+        <h1>Sinopse</h1>
+        <div class="row">
+            <!-- Coluna para o texto -->
+            <div class="col-md-8">
+                <p>A Casa da Coruja acompanha Luz, uma adolescente que encontra, por acidente, um portal para outra dimensão, onde humanos não são bem-vindos. Lá, ela começa uma amizade com Eda, uma bruxinha rebelde, e King, um jovem guerreiro. Mesmo não tendo habilidades mágicas, Luz decide estudar bruxaria e se torna aprendiz de Eda.</p>
+                
+                <!-- Listando todas as postagens e seus caminhos -->
+                <h1>Postagens</h1>
+                <div class="card-group">
+                    <% posts.forEach(post => { %>
+                        <div class="card">
+                            <img src="<%= post.imgCapa %>" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <h5 class="card-title text-dark"> <%= post.titulo %> </h5>
+                                <p class="card-text text-dark"> <%= post.conteudo %> </p>
+                                <a href="/post/<%= post.titulo %>" class="btn btn-primary"> <%= post.titulo %> </a>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+
+            <!-- Coluna para a imagem e a tabela -->
+            <div class="col-md-4">
+                <div class="d-flex flex-column">
+                    <img src="/images/TheOwlHouseCover.jpg" class="img-fluid mb-3" alt="Imagem da série">
+                    <table class="table text-white">
+                        <tbody>
+                            <tr>
+                                <td>Nome</td>
+                                <td>A Casa da Coruja</td>
+                            </tr>
+                            <tr>
+                                <td>Criação</td>
+                            </tr>
+                            <tr>
+                                <td>Nome</td>
+                            </tr>
+                            <tr>
+                                <td>Elenco</td>
+                            </tr>
+                            <tr>
+                                <td>Estrelando</td>
+                            </tr>
+                            <tr>
+                                <td>Gêneros</td> 
+                            </tr>
+                            <tr>
+                                <td>Produzido por</td>
+                            </tr>
+                            <tr>
+                                <td>Idiomas</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 </body>
 </html>

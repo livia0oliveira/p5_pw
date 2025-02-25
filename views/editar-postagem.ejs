@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Editar Postagem</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <%- include('extras/header') %>
+
+    <div class="container bg-dark text-white">
+        <h1>Editar Postagem</h1>
+        <p>Preencha os campos para editar sua postagem.</p>
+        <form action="/crud/editar-postagem" method="POST">
+            <!-- Campo para Título da Postagem -->
+            <div class="mb-3">
+                <label class="form-label" for="inputTitle">Título</label>
+                <input type="text" class="form-control" id="inputTitle" name="titulo" placeholder="Título da Postagem" required>
+            </div>
+            
+            <!-- Campo para Conteúdo da Postagem -->
+            <div class="mb-3">
+                <label class="form-label" for="inputContent">Conteúdo</label>
+                <textarea class="form-control" id="inputContent" name="conteudo" rows="5" placeholder="Conteúdo da Postagem" required></textarea>
+            </div>
+
+            <!-- Campo para Categoria (opcional) -->
+            <div class="mb-3">
+                <label class="form-label" for="inputCategory">Categoria</label>
+                <input type="text" class="form-control" id="inputCategory" name="categoria" placeholder="Categoria (opcional)">
+            </div>
+
+            <!-- Botão de Enviar -->
+            <button type="submit" class="btn btn-primary">Criar Postagem</button>
+        </form>
+    </div>
+
+</body>
+</html>
