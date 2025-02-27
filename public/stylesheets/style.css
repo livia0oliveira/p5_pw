@@ -1,3 +1,4 @@
+/* gerais */
 a {
   color: #00B7FF;
 }
@@ -6,8 +7,7 @@ body {
   background-image: url("/images/The_Boiling_Isles.webp");
   background-position: top;
   background-repeat: no-repeat;
-
-  padding: 50px;
+  margin-bottom: 20px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -33,11 +33,32 @@ body {
   margin: 10px;
 }
 
-.table td{
-  color: white
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita a 3 linhas, você pode ajustar */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adiciona "..." no final se o conteúdo for cortado */
+}
+
+.centered{
+  display: flex;
+  justify-content: center;  /* Alinha horizontalmente */
 }
 
 .info{
   width: 20%;
   border: 2px solid white;
+}
+
+.bottom-space {
+  padding-bottom: 10px;
+}
+
+.top-space {
+  padding-top: 10px;
+}
+
+.all-space {
+  padding: 10px;
 }

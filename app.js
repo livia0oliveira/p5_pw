@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
-const bodyParser = require('body-parser'); // Adicione isso
+const bodyParser = require('body-parser');
 
 const uri = process.env.URI;
 const client = new MongoClient(uri);
@@ -19,9 +19,9 @@ var crudRouter = require('./routes/crud');
 var app = express();
 
 // Middleware para lidar com dados de formulários
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());  // Coloque isso antes das rotas
-app.use(express.json()); // Para processar JSON no corpo da requisição
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 
 
 // view engine setup

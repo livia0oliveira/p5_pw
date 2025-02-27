@@ -6,6 +6,13 @@ const uri = process.env.URI;
 const client = new MongoClient(uri);
 const mydb = client.db('theowlhousewikidb').collection('postagem');
 const postagemDAO = require('../postagemDAO');
+const multer = require('multer');
+
+
+// Configuração do armazenamento em memória para salvar a imagem no MongoDB
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
 
 // Estabelecer a conexão com o banco de dados
 client.connect().then(() => {
@@ -24,13 +31,15 @@ router.get('/criar-postagem', async (req, res) => {
     res.render('criar-postagem');
 });
 
-router.post('/criar-postagem', async (req, res) => {
+router.post('/criar-postagem', upload.single('imagem'), async (req, res) => {
     const { titulo, conteudo, categoria } = req.body;
-    const postagem = { titulo: titulo, conteudo, categoria };
-    
+    const imagem = req.file ? req.file.buffer.toString('base64') : null;
+
+    const postagem = { titulo, conteudo, categoria, imagem };
+
     try {
         const result = await postagemDAO.insertPost(mydb, postagem);
-        res.redirect('/');  // Redireciona para a página principal após a criação
+        res.redirect('/');
     } catch (err) {
         console.log('Erro ao criar postagem:', err);
         res.status(500).send('Erro ao criar postagem');
@@ -42,15 +51,16 @@ router.get('/editar-postagem', async (req, res) => {
     res.render('editar-postagem')
 });
 
-router.post('/editar-postagem', async (req, res) => {
+router.post('/editar-postagem', upload.single('imagem'), async (req, res) => {
     const { titulo, conteudo, categoria } = req.body;
+    const imagem = req.file ? req.file.buffer.toString('base64') : null;
     
     if (!titulo || !conteudo) {
         return res.status(400).send('Título e conteúdo são obrigatórios!');
     }
 
     try {
-        const result = await postagemDAO.updateContentByTitle(mydb, titulo, conteudo);
+        const result = await postagemDAO.updateContentByTitle(mydb, titulo, conteudo, categoria, imagem);
         
         if (result.modifiedCount > 0) {
             res.redirect('/'); // Redireciona para a página principal após a edição
@@ -62,6 +72,7 @@ router.post('/editar-postagem', async (req, res) => {
         res.status(500).send('Erro no servidor!');
     }
 });
+
 
 
 // Rota para deletar-postagem

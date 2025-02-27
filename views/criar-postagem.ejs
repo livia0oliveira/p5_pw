@@ -16,7 +16,7 @@
     <div class="container bg-dark text-white">
         <h1>Criar Postagem</h1>
         <p>Preencha os campos para criar sua postagem.</p>
-        <form action="/crud/criar-postagem" method="POST">
+        <form action="/crud/criar-postagem" method="POST" enctype="multipart/form-data">
             <!-- Campo para Título da Postagem -->
             <div class="mb-3">
                 <label class="form-label" for="inputTitle">Título</label>
@@ -35,10 +35,10 @@
                 <input type="text" class="form-control" id="inputCategory" name="categoria" placeholder="Categoria (opcional)">
             </div>
 
-            <select class="form-select">
-                <option>Teste</option>
-                <option>OIOIOIOI</option>
-            </select>
+            <div class="mb-3">
+                <label class="form-label" for="inputImage">Imagem</label>
+                <input type="file" class="form-control" id="inputImage" name="imagem" accept="image/*" required>
+            </div>
 
             <!-- Botão de Enviar -->
             <button type="submit" class="btn btn-primary">Criar Postagem</button>

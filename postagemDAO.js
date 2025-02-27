@@ -5,7 +5,7 @@ class postagemDAO {
         const cursor = await client
         .find()
         .project({_id:0})
-        .sort({nome:1}) // edito nome p titulo?
+        .sort({titulo:1}) // edito nome p titulo?
         .limit(10)
         try {
             const results = await cursor.toArray()
@@ -38,11 +38,11 @@ class postagemDAO {
     }
 
     // UPDATE
-    static async updateContentByTitle(client, titulo, new_content) {
+    static async updateContentByTitle(client, titulo, conteudo, categoria, imagem) {
         try {
             const result = await client.updateOne(
                 { titulo: titulo }, // Filtro de busca pelo título
-                { $set: { conteudo: new_content } } // Atualiza o campo 'conteudo'
+                { $set: { conteudo: conteudo, categoria: categoria, imagem: imagem } } // Atualiza o conteudo
             );
             return result;
         } catch (err) {
